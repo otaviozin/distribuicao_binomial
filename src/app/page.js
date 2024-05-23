@@ -1,12 +1,14 @@
 'use client';
 import { useState } from 'react';
-import { calcularBinomialDistribution } from '../utils/calcs'; // Ajuste o caminho conforme necessário
+import { calculateBinomialDistribution } from '@/utils/calcs';
+import { preventNegativeValues } from '@/utils/keyConfigs';
 
 export default function Home() {
-    // Estados para armazenar os valores dos inputs
+    // Estados para armazenar os valores dos inputsconst chemists = people.filter(person =>
     const [inputs, setInputs] = useState({
         n: '',
         p: '',
+        x: 0
     });
     const [calc, setCalc] = useState([]);
 
@@ -20,12 +22,13 @@ export default function Home() {
     };
 
     // Função para calcular a distribuição binomial
-    const calcular = () => {
+    const calculate = () => {
         const { n, p } = inputs;
         // Converta n e p para números antes de passar para a função
-        const calculos = calcularBinomialDistribution(Number(n), Number(p));
-        setCalc(calculos);
+        const response = calculateBinomialDistribution(Number(n), Number(p));
+        setCalc(response);
     };
+
 
     return (
         <div>
@@ -35,6 +38,8 @@ export default function Home() {
                 <label>
                     n:
                     <input
+                        min='0'
+                        onKeyDown={preventNegativeValues}
                         type='number'
                         name='n'
                         value={inputs.n}
@@ -46,6 +51,8 @@ export default function Home() {
                 <label>
                     p:
                     <input
+                        min='0'
+                        onKeyDown={preventNegativeValues}
                         type='number'
                         name='p'
                         step='0.01'
@@ -54,14 +61,30 @@ export default function Home() {
                     />
                 </label>
             </div>
+            <div>
+                <label>
+                    x:
+                    <input
+                        min='0'
+                        onKeyDown={preventNegativeValues}
+                        type='number'
+                        name='x'
+                        value={inputs.x}
+                        onChange={handleChange}
+                    />
+                </label>
+            </div>
             {/* Botão para executar o cálculo */}
-            <button onClick={calcular}>Executar</button>
+            <button onClick={calculate}>Executar</button>
             {/* Renderizando os resultados */}
             <ul>
-                {calc.map((value, index) => (
-                    <li key={index}>
-                        X = {index} =&gt; {value.toFixed(3)}%
-                    </li>
+                {calc.map((value, index) => index == inputs.x && (
+                    <section>
+                        <p>Resultado do X</p>
+                        <li key={index}>
+                            X = {index} =&gt; {value.toFixed(3)}%
+                        </li>
+                    </section>
                 ))}
             </ul>
         </div>
