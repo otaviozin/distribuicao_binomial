@@ -4,7 +4,6 @@ import { calculateBinomialDistribution } from '@/utils/calcs';
 import { preventNegativeValues } from '@/utils/keyConfigs';
 
 export default function Home() {
-    // Estados para armazenar os valores dos inputsconst chemists = people.filter(person =>
     const [inputs, setInputs] = useState({
         n: '',
         p: '',
