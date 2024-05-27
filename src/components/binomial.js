@@ -3,7 +3,7 @@ import { calculateBinomialDistribution } from '@/utils/calcs';
 import { preventNegativeValues } from '@/utils/keyConfigs';
 
 export const Binomial = ({ onCalculate, results }) => {
-    const [inputs, setInputs] = useState({ n: '', p: '', x: '' });
+    const [inputs, setInputs] = useState({ n: '', p: '', x: '', option: '=' });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,12 +26,12 @@ export const Binomial = ({ onCalculate, results }) => {
     };
 
     return (
-        <div className='bg-secondary mx-5 mt-5 rounded-lg border border-black flex flex-col gap-5 items-center py-5 custom-shadow'>
+        <div className='bg-secondary mx-5 mt-5 rounded-lg border border-black flex flex-col gap-5 items-center py-5 custom-shadow h-80'>
             <div className='pt-5'>
                 <label>
-                    n:
+                    N:
                     <input
-                        className='rounded-full py-1 border border-black pl-3'
+                        className='rounded-full py-1 border border-black pl-3 ml-1'
                         min='0'
                         type='number'
                         name='n'
@@ -42,9 +42,9 @@ export const Binomial = ({ onCalculate, results }) => {
             </div>
             <div>
                 <label>
-                    p:
+                    P:
                     <input
-                        className='rounded-full py-1 border border-black pl-3'
+                        className='rounded-full py-1 border border-black pl-3 ml-1'
                         min='0'
                         step='0.01'
                         type='number'
@@ -56,9 +56,9 @@ export const Binomial = ({ onCalculate, results }) => {
             </div>
             <div>
                 <label>
-                    x:
+                    X:
                     <input
-                        className='rounded-full py-1 border border-black pl-3'
+                        className='rounded-full py-1 border border-black pl-3 ml-1'
                         min='0'
                         onKeyDown={preventNegativeValues}
                         type='number'
@@ -74,16 +74,26 @@ export const Binomial = ({ onCalculate, results }) => {
             >
                 Calcular
             </button>
-            <ul>
+            <div>
                 {results.map(
                     (value, index) =>
                         index == inputs.x && (
-                            <li key={index}>
-                                X = {index} =&gt; {value.toFixed(3)}%
-                            </li>
+                            <div className='bg-white text-black w-fit px-3 py-1 rounded-md border-2 border-black flex gap-4'>
+                                <p>X</p>
+                                <select
+                                    className='border border-black rounded-md'
+                                    value={inputs.option}
+                                    onChange={handleChange}
+                                >
+                                    <option>=</option>
+                                    <option>&gt;=</option>
+                                    <option>=&gt;</option>
+                                </select>
+                                <p key={index}> {value.toFixed(3)}%</p>
+                            </div>
                         )
                 )}
-            </ul>
+            </div>
         </div>
     );
 };
