@@ -1,7 +1,7 @@
 export const Intervals = () => {
-    return(
+    return (
         <div>
-            <input
+            <input />
         </div>
     );
-}
+};
