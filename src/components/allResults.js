@@ -1,6 +1,6 @@
-export const AllResults = ({ results }) => {
+export const AllResults = ({ results, resMean, resVariance, resStandardDeviation, resCoefficientVariation }) => {
     return (
-        <div className='bg-secondary mx-5 mt-5 rounded-lg border border-black flex flex-col gap-5 items-center py-5 custom-shadow h-80'>
+        <div className='bg-secondary mx-5 mt-5 rounded-lg border border-black flex flex-col gap-5 items-center py-5 custom-shadow h-96'>
             <h1 className='text-2xl font-bold'>Todos os X</h1>
             <div className='border-2 rounded overflow-auto'>
                 <table>
@@ -11,16 +11,38 @@ export const AllResults = ({ results }) => {
                             <th className='px-3'>Resultado</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='text-center'>
                         {results &&
                             Array.isArray(results) &&
                             results.map((result, index) => (
-                                <tr className='text-center border-b'>
+                                <tr key={index} className='border-b'>
                                     <td className='border-r-2 px-3'>{index}</td>
                                     <td className='border-r-2 px-3'>=</td>
-                                    <td>{result.toFixed(2)}%</td>
+                                    <td>{result.toFixed(3)}%</td>
                                 </tr>
                             ))}
+                    </tbody>
+                </table>
+            </div>
+            <div className='border-2 rounded'>
+                <table>
+                    <tbody className='text-left'>
+                        <tr className='border-b'>
+                            <td className='border-r-2 px-3'>Média</td>
+                            <td className='px-2'>{resMean}</td>
+                        </tr>
+                        <tr className='border-b'>
+                            <td className='border-r-2 px-3'>Variância</td>
+                            <td className='px-2'>{resVariance}</td>
+                        </tr>
+                        <tr className='border-b'>
+                            <td className='border-r-2 px-3'>Desvio padrão</td>
+                            <td className='px-2'>{resStandardDeviation}</td>
+                        </tr>
+                        <tr className='border-b'>
+                            <td className='border-r-2 px-3'>Coeficiente de variação</td>
+                            <td className='px-2'>{resCoefficientVariation}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
