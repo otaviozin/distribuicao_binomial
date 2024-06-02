@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { calculateBinomialDistribution } from '@/utils/calcs';
+import {
+    calculateBinomialDistribution,
+    calculateCoefficientVariation,
+    calculateMean,
+    calculateStandardDeviation,
+    calculateVariance,
+} from '@/utils/calcs';
 import { preventNegativeValues } from '@/utils/keyConfigs';
 
 export const Binomial = ({ onCalculate, results }) => {
@@ -22,11 +28,15 @@ export const Binomial = ({ onCalculate, results }) => {
             });
         }
         const results = calculateBinomialDistribution(Number(n), Number(p));
-        onCalculate(results);
+        const resMean = calculateMean(Number(n), Number(p));
+        const resVariance = calculateVariance(Number(n), Number(p));
+        const resStandardDeviation = calculateStandardDeviation(Number(n), Number(p));
+        const resCoefficientVariation = calculateCoefficientVariation(Number(n), Number(p));
+        onCalculate(results, resMean, resVariance, resStandardDeviation, resCoefficientVariation);
     };
 
     return (
-        <div className='bg-secondary mx-5 mt-5 rounded-lg border border-black flex flex-col gap-5 items-center py-5 custom-shadow h-80'>
+        <div className='bg-secondary mx-5 mt-5 rounded-lg border border-black flex flex-col gap-5 items-center py-5 custom-shadow h-96'>
             <div className='pt-5'>
                 <label>
                     N:
@@ -68,17 +78,17 @@ export const Binomial = ({ onCalculate, results }) => {
                     />
                 </label>
             </div>
-            <button
-                className='bg-[#181848] w-fit px-2 py-1 rounded-md border-2 border-black'
-                onClick={calculate}
-            >
+            <button className='bg-[#181848] w-fit px-2 py-1 rounded-md border-2 border-black' onClick={calculate}>
                 Calcular
             </button>
             <div>
                 {results.map(
                     (value, index) =>
                         index == inputs.x && (
-                            <div className='bg-white text-black w-fit px-3 py-1 rounded-md border-2 border-black flex gap-4'>
+                            <div
+                                key={index}
+                                className='bg-white text-black w-fit px-3 py-1 rounded-md border-2 border-black flex gap-4'
+                            >
                                 <p>X</p>
                                 <select
                                     className='border border-black rounded-md'
