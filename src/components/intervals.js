@@ -93,7 +93,7 @@ export const Intervals = ({ results }) => {
             >
                 Calcular
             </button>
-            <p>Soma dos valores entre os intervalos: {sumResult.toFixed(2)}</p>
+            <p>Soma dos valores entre os intervalos: {sumResult.toFixed(2)}%</p>
         </div>
     );
 };
