@@ -1,109 +1,99 @@
 import { useState } from 'react';
-import {
-    calculateBinomialDistribution,
-    calculateCoefficientVariation,
-    calculateMean,
-    calculateStandardDeviation,
-    calculateVariance,
-} from '@/utils/calcs';
 import { preventNegativeValues } from '@/utils/keyConfigs';
 
-export const Intervals = ({ onCalculate, results }) => {
-    const [inputs, setInputs] = useState({ n: '', p: '', x: '', option: '=' });
+export const Intervals = ({ results }) => {
+    const [lowerValue, setLowerValue] = useState('');
+    const [lowerOption, setLowerOption] = useState('<');
+    const [upperValue, setUpperValue] = useState('');
+    const [upperOption, setUpperOption] = useState('<');
+    const [sumResult, setSumResult] = useState(0);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setInputs({
-            ...inputs,
-            [name]: value,
-        });
-    };
+    const calcularSomaIntervalo = () => {
+        const lowerIndex = parseInt(lowerValue);
+        const upperIndex = parseInt(upperValue);
 
-    const calculate = () => {
-        const { n, p, x } = inputs;
-        if (x == '') {
-            setInputs({
-                ...inputs,
-                x: 0,
-            });
+        if (
+            isNaN(lowerIndex) ||
+            isNaN(upperIndex) ||
+            lowerIndex === upperIndex ||
+            lowerIndex < 0 ||
+            upperIndex >= results.length
+        ) {
+            setSumResult(0);
+            return;
         }
-        const results = calculateBinomialDistribution(Number(n), Number(p));
-        const resMean = calculateMean(Number(n), Number(p));
-        const resVariance = calculateVariance(Number(n), Number(p));
-        const resStandardDeviation = calculateStandardDeviation(Number(n), Number(p));
-        const resCoefficientVariation = calculateCoefficientVariation(Number(n), Number(p));
-        onCalculate(results, resMean, resVariance, resStandardDeviation, resCoefficientVariation);
+
+        let filteredResults;
+        if (lowerOption === '<' && upperOption === '<') {
+            filteredResults = results.slice(lowerIndex + 1, upperIndex);
+        } else if (lowerOption === '<=' && upperOption === '<') {
+            filteredResults = results.slice(lowerIndex, upperIndex);
+        } else if (lowerOption === '<' && upperOption === '<=') {
+            filteredResults = results.slice(lowerIndex + 1, upperIndex + 1);
+        } else if (lowerOption === '<=' && upperOption === '<=') {
+            filteredResults = results.slice(lowerIndex, upperIndex + 1);
+        }
+
+        const soma = filteredResults.reduce((acc, curr) => acc + curr, 0);
+        setSumResult(soma);
     };
 
     return (
         <div className='bg-secondary mx-5 mt-5 rounded-lg border border-black flex flex-col gap-5 items-center py-5 custom-shadow h-96'>
-            <div className='pt-5'>
-                <label>
-                    N:
-                    <input
-                        className='rounded-full py-1 border border-black pl-3 ml-1'
-                        min='0'
-                        type='number'
-                        name='n'
-                        value={inputs.n}
-                        onChange={handleChange}
-                    />
-                </label>
+            <h1 className='text-2xl font-bold'>Intervalos</h1>
+            <div className='flex gap-2 text-black text-center'>
+                <input
+                    className='rounded-full py-1 border border-black pl-3 w-16'
+                    value={lowerValue}
+                    onChange={(e) => setLowerValue(e.target.value)}
+                    onKeyDown={preventNegativeValues}
+                    min='0'
+                    step='1'
+                    type='number'
+                    name='lowerValue'
+                />
+                <select
+                    className='border border-black rounded-md text-center'
+                    value={lowerOption}
+                    onChange={(e) => setLowerOption(e.target.value)}
+                    name='lowerOption'
+                >
+                    <option>&lt;</option>
+                    <option>&lt;=</option>
+                </select>
+                <input
+                    className='rounded-full py-1 border border-black text-center w-16'
+                    value='X'
+                    type='text'
+                    disabled
+                />
+                <select
+                    className='border border-black rounded-md text-center'
+                    value={upperOption}
+                    onChange={(e) => setUpperOption(e.target.value)}
+                    name='upperOption'
+                >
+                    <option>&lt;</option>
+                    <option>&lt;=</option>
+                </select>
+                <input
+                    className='rounded-full py-1 border border-black pl-3 w-16'
+                    value={upperValue}
+                    onChange={(e) => setUpperValue(e.target.value)}
+                    onKeyDown={preventNegativeValues}
+                    min='0'
+                    step='1'
+                    type='number'
+                    name='upperValue'
+                />
             </div>
-            <div>
-                <label>
-                    P:
-                    <input
-                        className='rounded-full py-1 border border-black pl-3 ml-1'
-                        min='0'
-                        step='0.01'
-                        type='number'
-                        name='p'
-                        value={inputs.p}
-                        onChange={handleChange}
-                    />
-                </label>
-            </div>
-            <div>
-                <label>
-                    X:
-                    <input
-                        className='rounded-full py-1 border border-black pl-3 ml-1'
-                        min='0'
-                        onKeyDown={preventNegativeValues}
-                        type='number'
-                        name='x'
-                        value={inputs.x}
-                        onChange={handleChange}
-                    />
-                </label>
-            </div>
-            <button className='bg-[#181848] w-fit px-2 py-1 rounded-md border-2 border-black' onClick={calculate}>
+            <button
+                className='bg-[#181848] w-fit px-2 py-1 rounded-md border-2 border-black'
+                onClick={calcularSomaIntervalo}
+            >
                 Calcular
             </button>
-            <div>
-                {results.map(
-                    (value, index) =>
-                        index == inputs.x && (
-                            <div
-                                key={index}
-                                className='bg-white text-black w-fit px-3 py-1 rounded-md border-2 border-black flex gap-4'
-                            >
-                                <p>X</p>
-                                <select
-                                    className='border border-black rounded-md'
-                                    value={inputs.option}
-                                    onChange={handleChange}
-                                >
-                                    <option>=</option>
-                                    <option>&gt;=</option>
-                                    <option>=&gt;</option>
-                                </select>
-                                <p key={index}> {value.toFixed(3)}%</p>
-                            </div>
-                        )
-                )}
-            </div>
+            <p>Soma dos valores entre os intervalos: {sumResult.toFixed(2)}</p>
         </div>
     );
 };

@@ -18,7 +18,7 @@ export const AllResults = ({ results, resMean, resVariance, resStandardDeviation
                                 <tr key={index} className='border-b'>
                                     <td className='border-r-2 px-3'>{index}</td>
                                     <td className='border-r-2 px-3'>=</td>
-                                    <td>{result.toFixed(3)}%</td>
+                                    <td>{result.toFixed(2)}%</td>
                                 </tr>
                             ))}
                     </tbody>
