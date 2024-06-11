@@ -32,6 +32,7 @@ export default function Home() {
                     resStandardDeviation={resStandardDeviation}
                     resCoefficientVariation={resCoefficientVariation}
                 />
+                <Intervals results={results} />
             </div>
         </div>
     );
