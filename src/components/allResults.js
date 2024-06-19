@@ -1,7 +1,7 @@
 export const AllResults = ({ results, resMean, resVariance, resStandardDeviation, resCoefficientVariation }) => {
     return (
         <div className='bg-secondary mx-5 mt-5 rounded-lg border border-black flex flex-col gap-5 items-center py-5 custom-shadow h-96'>
-            <h1 className='text-2xl font-bold'>Todos os X</h1>
+            <h1 className='text-2xl font-bold'>Outros</h1>
             <div className='border-2 rounded overflow-auto'>
                 <table>
                     <thead>

@@ -14,7 +14,7 @@ export const roundRule = (value) => {
     }
 
     // Retorna o valor com duas casas decimais
-    return value.toFixed(3);
+    return value.toFixed(2);
 };
 
 // Distribuição Binomial
@@ -26,13 +26,13 @@ export const calculateBinomialDistribution = (n, p) => {
 // Média
 export const calculateMean = (n, p) => {
     const mean = n * p;
-    return mean.toFixed(3);
+    return mean.toFixed(2);
 };
 
 // Variância
 export const calculateVariance = (n, p) => {
     const variance = n * p * (1 - p);
-    return variance.toFixed(3);
+    return variance.toFixed(2);
 };
 
 // Desvio Padrão
