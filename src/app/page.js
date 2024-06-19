@@ -25,6 +25,7 @@ export default function Home() {
             <h1 className='text-3xl font-bold'>Distribuição Binomial</h1>
             <div className='lg:grid grid-cols-3'>
                 <Binomial onCalculate={handleCalculate} results={results} />
+                <Intervals results={results} />
                 <AllResults
                     results={results}
                     resMean={resMean}
@@ -32,7 +33,6 @@ export default function Home() {
                     resStandardDeviation={resStandardDeviation}
                     resCoefficientVariation={resCoefficientVariation}
                 />
-                <Intervals results={results} />
             </div>
         </div>
     );
