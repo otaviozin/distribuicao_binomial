@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Calculadora de Distribuição Binomial
 
-## Getting Started
+<img src="page.png" alt="Imagem do site">
 
-First, run the development server:
+> O site consiste em uma calculadora de distribuição binomial realizado para a disciplina de estatítica na FATEC Jundiaí
 
-```bash
+## 💻 Pré-requisitos
+
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+
+- Versão mais recente do `Node.js`
+
+## 🚀 Instalando distribuicao_binomial
+
+Para executar o projeto, siga estas etapas:
+
+Com o terminal aberto, copie e cole os seguintes comandos:
+
+```
+git clone https://github.com/otaviozin/distribuicao_binomial.git
+```
+```
+cd distribuicao_binomial
+```
+```
+npm install
+```
+Por fim, você pode executar o projeto no modo desenvolvimento:
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Não foi testado em sistemas Linux e MacOS, mas acredito que seja o mesmo procedimento por se tratar de um projeto Next.js
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ☕ Usando o projeto
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Para usar em modo de produção, siga estas etapas:
+ - Faça os procedimentos de instalação acima
+ - Após isso, digite os seguintes comandos na raíz do projeto:
+```
+npm run buid
+```
+```
+npm start
+```
 
-## Learn More
+## 🤝 Colaboradores
 
-To learn more about Next.js, take a look at the following resources:
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/otaviozin" title="otaviozin">
+        <img src="https://avatars.githubusercontent.com/u/60949367?v=4" width="100px;" alt="Foto do otaviozin"/><br>
+        <sub>
+          <b>otaviozin</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Gust4avo" title="Gust4avo">
+        <img src="https://avatars.githubusercontent.com/u/112019221?v=4" width="100px;" alt="Foto do Gust4avo"/><br>
+        <sub>
+          <b>Gust4avo</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/iurilin" title="iurilin">
+        <img src="https://avatars.githubusercontent.com/u/150308362?v=4" width="100px;" alt="Foto do iurilin"/><br>
+        <sub>
+          <b>iurilin</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 📝 Licença
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Esse projeto está sob licença. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
